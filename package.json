@@ -18,8 +18,7 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "yarn run build",
-    "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "yarn run build && cd example && yarn install && yarn run build && yarn run deploy"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
