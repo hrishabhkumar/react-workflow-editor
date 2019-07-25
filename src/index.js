@@ -1,22 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import EditorContainer from './editor/EditorContainer';
 
-import styles from './styles.css'
+const icons = require('@fortawesome/free-solid-svg-icons');
 
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  }
+library.add(...Object.values(icons.fas));
 
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
-}
+export default EditorContainer;

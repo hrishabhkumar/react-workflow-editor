@@ -1,15 +1,15 @@
 {
-  "name": "react-workflow-designer-example",
-  "homepage": "https://https://github.com/hrishabhkumar.github.io/react-workflow-designer",
+  "name": "react-workflow-editor-example",
+  "homepage": "https://https://github.com/hrishabhkumar.github.io/react-workflow-editor",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
     "react-scripts": "^1.1.4",
-    "react-workflow-designer": "link:.."
+    "react-workflow-editor": "link:.."
   },
   "scripts": {
     "start": "react-scripts start",

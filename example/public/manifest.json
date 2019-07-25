@@ -1,6 +1,6 @@
 {
-  "short_name": "react-workflow-designer",
-  "name": "react-workflow-designer",
+  "short_name": "react-workflow-editor",
+  "name": "react-workflow-editor",
   "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",

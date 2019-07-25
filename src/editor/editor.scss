@@ -1,0 +1,357 @@
+$node-height: 26px;
+$line-height: 23px;
+$line-height-arrow: 7px;
+$icon-height: 18px;
+$icon-width: 18px;
+$node-width: 150px;
+
+//Will use later for theme
+$base-color: #9f9f9f;
+$font-color: black;
+$font-color-light: #fff;
+$strong-color: red;
+
+.react-workflow-editor-container {
+    background-color: #fff;
+    flex-grow: 1;
+    overflow: auto;
+    border-right: 2px solid #ddd;
+    padding-left: 10px;
+    position: relative;
+
+    $loop-and-switch-border-color: darken($base-color, 35%);
+    $draged-color: lighten($base-color, 20%);
+    $line-color: darken($base-color, 30%);
+
+    &.editor {
+        flex-grow: 1;
+        display: table;
+        padding: 20px;
+        color: $font-color;
+        i {
+          width: 24px;
+          height: 24px;
+        }
+        .title {
+          text-align: center;
+          font-size: 14px;
+        }
+        .workflow-body {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          &.root {
+            min-height: 300px;
+            min-width: 400px;
+            >.flow-line {
+              flex-grow: 1;
+              display: flex;
+              flex-direction: column;
+              >.line {
+                flex-grow: 1;
+              }
+            }
+          }
+        }
+        .workflow-node {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          min-width: $node-width;
+          &.normal {
+            color: $font-color-light;
+            border: 0;
+            border-radius: 4px;
+            background-color: $base-color;
+            font-size: 14px;
+            width: $node-width;
+            margin: 3px 0;
+            padding: 3px;
+            color: white;
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #8eccbb;
+            &.draged {
+              background-color: $draged-color;
+            }
+            &.clicked {
+              outline-offset: 8px;
+              outline: 1px dashed $strong-color;
+            }
+          }
+          &.case {
+            margin: 0;
+            padding: 0;
+            >.workflow-node-line-up {
+              height: $line-height / 2;
+              width: 100%;
+              display: flex;
+              >.line {
+                height: 100%;
+                width: 100%;
+                border-top: 2px solid $line-color;
+                &.left-div {
+                  border-right: 1px solid $line-color;
+                }
+                &.right-div {
+                  border-left: 1px solid $line-color;
+                }
+              }
+            }
+            &:first-child {
+              >.workflow-node-line-up>.line.left-div {
+                border-top-width: 0;
+              }
+            }
+            &:last-child {
+              >.workflow-node-line-up>.line.right-div {
+                border-top-width: 0;
+              }
+            }
+            >.workflow-node-line-down {
+              height: $line-height / 2;
+              width: 100%;
+              display: flex;
+              >.line {
+                height: 100%;
+                width: 100%;
+                border-bottom: 2px solid $line-color;
+                &.left-div {
+                  border-right: 1px solid $line-color;
+                }
+                &.right-div {
+                  border-left: 1px solid $line-color;
+                }
+              }
+            }
+            &:first-child {
+              >.workflow-node-line-down>.line.left-div {
+                border-bottom-width: 0;
+              }
+            }
+            &:last-child {
+              >.workflow-node-line-down>.line.right-div {
+                border-bottom-width: 0;
+              }
+            }
+            >.workflow-node-rect-wrap {
+              display: flex;
+              flex-grow: 1;
+              >.insert-rect-space {
+                display: block;
+                width: 2px;
+                background-color: red;
+              }
+              >.workflow-node-rect {
+                flex-grow: 1;
+                min-width: $node-width;
+                border: 1px solid $loop-and-switch-border-color;
+                margin: 0 4px;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                &.draged {
+                  background-color: $draged-color;
+                }
+                &.clicked {
+                  outline-offset: 4px;
+                  outline: 1px dashed $strong-color; // box-shadow: 4px 4px 2px #888888;
+                }
+                >.title {
+                  height: $node-height + 10px;
+                  background-size: $icon-height;
+                  background-position: 50% $node-height;
+                  background-repeat: no-repeat;
+                }
+                .workflow-body {
+                  padding: 0 4px;
+                  flex-grow: 1;
+                  &:empty {
+                    height: 0;
+                    flex-grow: 0;
+                  }
+                }
+              }
+            }
+          }
+          &.switch {
+            margin-left: 4px;
+            margin-right: 4px;
+            border: 1px solid $loop-and-switch-border-color;
+            border-radius: 5px;
+            padding-left: 8px;
+            padding-right: 8px;
+            &.draged {
+              background-color: $draged-color;
+            }
+            &.clicked {
+              outline-offset: 4px;
+              outline: 1px dashed $strong-color; // box-shadow: 4px 4px 2px #888888;
+            }
+            >.title {
+              height: $node-height;
+              background-size: $icon-height;
+              background-position: 50% $node-height;
+              background-repeat: no-repeat;
+              line-height: $node-height;
+              .expand-icon {
+                display: none;
+                margin-right: 6px;
+                width: 14px;
+                height: 14px;
+              }
+              .collapse-icon {
+                display: inline;
+                margin-right: 6px;
+                width: 14px;
+                height: 14px;
+              }
+            }
+            &.collapse {
+              >* {
+                display: none;
+              }
+              >.title {
+                display: block;
+                .expand-icon {
+                  display: inline;
+                }
+                .collapse-icon {
+                  display: none;
+                }
+              }
+            }
+          }
+          &.loop {
+            border-radius: 5px;
+            padding-left: 8px;
+            padding-right: 8px;
+            padding-bottom: 0;
+            border: 1px solid $loop-and-switch-border-color;
+            border-radius: 5px;
+            &.draged {
+              background-color: $draged-color;
+            }
+            &.clicked {
+              outline-offset: 4px;
+              outline: 1px dashed $strong-color; // box-shadow: 4px 4px 2px #888888;
+            }
+            >.title {
+              height: $node-height;
+              background-size: $icon-height;
+              background-position: 50% $node-height;
+              background-repeat: no-repeat;
+              line-height: $node-height;
+              .expand-icon {
+                display: none;
+                margin-right: 6px;
+                width: 14px;
+                height: 14px;
+              }
+              .collapse-icon {
+                display: inline;
+                margin-right: 6px;
+                width: 14px;
+                height: 14px;
+              }
+            }
+            &.collapse {
+              >* {
+                display: none;
+              }
+              >.title {
+                display: block;
+                .expand-icon {
+                  display: inline;
+                }
+                .collapse-icon {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+        .flow-line {
+          width: $node-width;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .line {
+            width: 0px;
+            border: 1px solid $line-color;
+            height: $line-height / 2;
+            flex-grow: 1;
+            &.half-height {
+              height: $line-height / 2;
+            }
+          }
+          .rect {
+            display: none;
+            height: 6px;
+            width: 6px;
+            border: 1px dotted $strong-color;
+            border-radius: 50%;
+          }
+          &.dragover {
+            >.line {
+              border-color: $strong-color;
+              height: ($line-height - 6)/ 2;
+            }
+            >.rect {
+              display: block;
+            }
+          } // 带箭头的线
+          &.arrow-line {
+            .line {
+              height: ($line-height - $line-height-arrow) / 2;
+            }
+            .arrow {
+              width: 0;
+              height: 0;
+              border-left: 4px solid transparent;
+              border-right: 4px solid transparent;
+              border-top: $line-height-arrow solid $line-color;
+            }
+            &:last-child {
+              flex-grow: 1;
+            }
+            &.dragover {
+              .line {
+                height: ($line-height - $line-height-arrow - 6) / 2;
+              }
+              >.arrow {
+                border-top-color: $strong-color;
+              }
+            }
+          }
+        }
+        .workflow-body {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .node-start,
+        .node-end {
+          height: 32px;
+          width: 100px;
+          display: flex;
+          align-items: center;
+          flex-direction: column-reverse;
+          .i {
+            width: 32px;
+            height: 32px;
+            background-size: contain;
+          }
+        }
+        .node-start {
+          .i {}
+        }
+        .node-end {
+          .i {}
+        }
+        .switch-body {
+          display: flex;
+          flex-direction: row;
+        }
+    }
+}
+    
