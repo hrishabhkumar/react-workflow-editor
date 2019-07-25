@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # react-workflow-designer
 
 > Workflow Designer using React.
@@ -29,3 +30,7 @@ class Example extends Component {
 ## License
 
 MIT © [https://github.com/hrishabhkumar](https://github.com/https://github.com/hrishabhkumar)
+=======
+# react-workflow-editor
+Editor for workflow
+>>>>>>> 7d3a4e6d7be468bb8aafde7b7e4f1d783d89ffff
