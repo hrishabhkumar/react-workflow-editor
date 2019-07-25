@@ -44,7 +44,6 @@ const Editor = (props, ref) => {
     const [data, setData] = useState(null);
     const [prevData, setPrevData] = useState(null);
     const [dataFromProps, setDataFromProps] = useState(null);
-    const [hasGetDerivedStateFromPropsFunc, setHasGetDerivedStateFromPropsFunc] = useState(false);
     const [currentId, setCurrentId] = useState(0);
     const [collapseStateIds, setCollapseStateIds] = useState({});
     const [dragId, setDragId] = useState(null);
@@ -59,7 +58,6 @@ const Editor = (props, ref) => {
         setPrevData(dataFromProps);
         setDataFromProps(dataString);
         setData(newData);
-        setHasGetDerivedStateFromPropsFunc(true);
     }
 
     const handleUpdateData = (updatedData) => {
@@ -596,12 +594,6 @@ const Editor = (props, ref) => {
             </div>
         );
     };
-    if (!hasGetDerivedStateFromPropsFunc) {
-        console.error(
-            'Component react-workflow-editor need react with version 16.4 or above.',
-        );
-        return null;
-    }
     if (!data) {
         return null;
     }
