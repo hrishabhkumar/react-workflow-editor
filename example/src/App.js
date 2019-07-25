@@ -5,20 +5,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const template = {
   id: "default",
-  nodes: [
-    "open",
-    "click",
-    "data",
-    "input",
-    "verification",
-    "dropdown",
-    "loop",
-    "switch",
-    "mouse-enter",
-    "stop-loop",
-    "stop",
-    "case",
-  ],
+  nodes: {
+    general: [
+      "open",
+      "click",
+      "data",
+      "input",
+      "verification",
+      "dropdown",
+      "mouse-enter",
+      "stop-loop",
+      "stop",
+      "case",
+    ],
+    special: [
+      "loop",
+      "switch",
+    ]
+  },
   entities: {
     node: {
       open: {

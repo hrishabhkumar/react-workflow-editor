@@ -5,4 +5,9 @@
     flex-direction: row;
     position: relative;
     overflow: hidden;
+    .react-workflow-editor-toolbar-container-wrapper {
+      height: 100%;
+      width: 125px;
+      overflow-y: hidden;
+    }
   }

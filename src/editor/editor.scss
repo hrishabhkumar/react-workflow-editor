@@ -11,6 +11,8 @@ $font-color: black;
 $font-color-light: #fff;
 $strong-color: red;
 
+
+
 .react-workflow-editor-container {
     background-color: #fff;
     flex-grow: 1;
@@ -23,9 +25,12 @@ $strong-color: red;
     $draged-color: lighten($base-color, 20%);
     $line-color: darken($base-color, 30%);
 
+    &:focus {
+      outline: none;
+    }
+
     &.editor {
         flex-grow: 1;
-        display: table;
         padding: 20px;
         color: $font-color;
         i {

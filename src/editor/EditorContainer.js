@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Editor from './Editor';
-import Toolbar from '../toolbar/toolbar';
+import Toolbar from '../toolbar/Toolbar';
 import './editorContainer.scss';
 
 const iconSize = 34;
@@ -27,9 +27,8 @@ const EditorContainer = ({
                 nodes,
                 entities: { node: nodeEntity },
             } = template;
-            const tools = nodes.filter(
-                x => nodeEntity[x].props.showInToolbar === 'Y',
-            );
+            const finalNodes = [].concat(...Object.values(nodes));
+            const tools = finalNodes.filter(x => nodeEntity[x].props.showInToolbar === 'Y');
             const count = tools.length;
             const rows = Math.floor(
                 (containerRef.current.offsetHeight - toolbarPadding * 2) / iconSize,
@@ -48,11 +47,13 @@ const EditorContainer = ({
             style={style}
             ref={containerRef}
         >
-            <Toolbar
-                template={template}
-                width={width}
-                iconWritingMode={iconWritingMode}
-            />
+            <div className="react-workflow-editor-toolbar-container-wrapper">
+                <Toolbar
+                    template={template}
+                    width={width}
+                    iconWritingMode={iconWritingMode}
+                />
+            </div>
             <Editor
                 data={data}
                 style={workspaceStyle}

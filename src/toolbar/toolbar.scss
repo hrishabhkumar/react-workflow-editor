@@ -1,4 +1,4 @@
-$icon-wrap-width: 30px;
+$icon-wrap-width: 100%;
 $icon-wrap-height: 30px;
 $icon-width: 24px;
 $icon-height: 24px;
@@ -13,24 +13,54 @@ $icon-height: 24px;
   background-color: #ddd;
   border-right: 1px solid #444;
   padding: 2px;
+  width: 120px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  .parent-accordion {
+    width: 100%;
+  }
+  .accordion-content {
+    .accordion-heading {
+      &.clicked {
+        font-weight: bold;
+      }
+    }
+    &.accordion-close {
+      display: none;
+    }
+    &.accordion-open {
+      display: block;
+    }
+  }
   .icon-wrap {
     width: $icon-wrap-width;
     height: $icon-wrap-height;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     writing-mode: horizontal-tb;
+    display: inline-block;
     margin: 2px;
+    white-space: nowrap;
     &:hover {
       outline: 1px solid blue;
       background-color: lightseagreen;
     }
   }
+  .flow-name {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    width: 81px;
+    height: 24px;
+    vertical-align: middle;
+  }
   .icon {
     pointer-events: none;
-    width: $icon-width;
-    height: $icon-height;
+    width: 24px;
+    height: 24px;
     background-size: contain;
+    display: inline-block;
     >svg {
       display: block;
       width: 20px;
