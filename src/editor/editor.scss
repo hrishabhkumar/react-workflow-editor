@@ -63,6 +63,7 @@ $strong-color: red;
           flex-direction: column;
           align-items: center;
           min-width: $node-width;
+          word-break: break-all;
           &.normal {
             color: $font-color-light;
             border: 0;

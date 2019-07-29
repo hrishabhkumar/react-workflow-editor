@@ -17,28 +17,7 @@ const EditorContainer = ({
     onChange,
     workflowId,
 }) => {
-    const [height, setHeight] = useState(0);
-    const [width, setWidth] = useState(iconSize + toolbarPadding);
     const containerRef = useRef();
-
-    useEffect(() => {
-        if (containerRef && containerRef.current.offsetHeight !== height) {
-            const {
-                nodes,
-                entities: { node: nodeEntity },
-            } = template;
-            const finalNodes = [].concat(...Object.values(nodes));
-            const tools = finalNodes.filter(x => nodeEntity[x].props.showInToolbar === 'Y');
-            const count = tools.length;
-            const rows = Math.floor(
-                (containerRef.current.offsetHeight - toolbarPadding * 2) / iconSize,
-            );
-            const columns = Math.ceil(count / rows);
-            const newWidth = columns * iconSize;
-            setWidth(newWidth);
-            setHeight(containerRef.current.offsetHeight);
-        }
-    });
 
     return (
         <div
@@ -50,7 +29,6 @@ const EditorContainer = ({
             <div className="react-workflow-editor-toolbar-container-wrapper">
                 <Toolbar
                     template={template}
-                    width={width}
                     iconWritingMode={iconWritingMode}
                 />
             </div>

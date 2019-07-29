@@ -247,16 +247,15 @@ export function getNewFlowByCopy({
     };
 }
 
-export function getNewNode(type, action, name, newIdFunc) {
+export function getNewNode(type = 'normal', node, newIdFunc) {
     const newIds = [];
     const id = newIdFunc(newIds);
     newIds.push(id);
     const newNode = {
+        ...node,
         id,
+        type,
     };
-    newNode.name = name;
-    newNode.type = type;
-    newNode.action = action;
     if (type === 'loop') {
         newNode.type = 'loop';
         newNode.children = [];
@@ -287,7 +286,7 @@ export function getNewNode(type, action, name, newIdFunc) {
 }
 
 /**
- * 获取新的节点ID并保证唯一
+ *
  * @param {*} flow
  */
 export const getNewIdFunc = (flow, prefix = '') => (ids) => {
@@ -299,4 +298,24 @@ export const getNewIdFunc = (flow, prefix = '') => (ids) => {
         id = `${prefix}${index}`;
     } while (prevIds.includes(id) || ids.includes(id));
     return id;
+};
+
+/**
+ *
+ * @param {*} node
+ */
+export const getTitleOfNode = (node) => {
+    let title = node.name;
+    if (node.description) {
+        try {
+            const names = Object.keys(node);
+            const vals = Object.values(node);
+            title = new Function(...names, `return \`${node.description}\`;`)(...vals); // eslint-disable-line
+            // const description = node.description.replace(/\$\{/g, '${node.');
+            // title = eval('`' + description + '`'); // eslint-disable-line
+        } catch (e) {
+            console.error(e);
+        }
+    }
+    return title;
 };

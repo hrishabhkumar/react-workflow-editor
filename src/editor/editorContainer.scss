@@ -7,7 +7,10 @@
     overflow: hidden;
     .react-workflow-editor-toolbar-container-wrapper {
       height: 100%;
-      width: 125px;
-      overflow-y: hidden;
+      width: 160px;
+      @media screen and (max-width: 320px) {
+        width: 20%;
+      }
+      overflow: hidden;
     }
   }

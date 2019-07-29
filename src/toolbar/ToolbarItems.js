@@ -6,12 +6,12 @@ import './toolbar.scss';
 const DRAG_IMAGE_DOM_ID = 'flow-icon-draged-image';
 
 const handleDragStart = node => (e) => {
-    e.dataTransfer.setData('type', node.type);
+    e.dataTransfer.setData('type', node.type || 'normal');
     e.dataTransfer.setData('node', JSON.stringify(node));
-    e.dataTransfer.setData('nodeName', node.props.name);
+    e.dataTransfer.setData('nodeName', node.name);
     e.dataTransfer.setData('method', 'new');
     const dragImage = e.target.cloneNode();
-    dragImage.innerHTML = node.props.name;
+    dragImage.innerHTML = node.name;
     dragImage.style.width = '150px';
     dragImage.style.height = '23px';
     dragImage.style.display = 'block';
@@ -33,17 +33,19 @@ const handleDragEnd = () => {
     }
 };
 
-const ToolbarItems = ({ tools, nodeEntity, group }) => {
+const ToolbarItems = ({
+    tools, nodeEntity, group, groupIcon,
+}) => {
     const [open, setOpen] = useState(false);
     const [className, setClassName] = useState('accordion-content accordion-close');
-    const [caretClass, setCaretClass] = useState('caret-right');
+    const [caretClass, setCaretClass] = useState('caret-left');
     const [headingClassName, setHeadingClassName] = useState('accordion-heading');
     const handleClick = () => {
         if (open) {
             setOpen(false);
             setClassName('accordion-content accordion-close');
             setHeadingClassName('accordion-heading');
-            setCaretClass('caret-right');
+            setCaretClass('caret-left');
         } else {
             setOpen(true);
             setClassName('accordion-content accordion-open');
@@ -52,16 +54,26 @@ const ToolbarItems = ({ tools, nodeEntity, group }) => {
         }
     };
     return (
-        <div className="parent-accordion">
-            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-            <div className={headingClassName} onClick={handleClick}>
-                <FontAwesomeIcon icon={caretClass} /> {group}
-            </div>
-            <div className={className}>
+        <ul className="parent-accordion">
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+            <li className={headingClassName} onClick={handleClick}>
+                <div className="group-icon-wrap">
+                    <div className="group-icon">
+                        {
+                            typeof groupIcon === 'string' ? <FontAwesomeIcon icon={groupIcon} /> : groupIcon
+                        }
+                        <span className="group-title">{group}</span>
+                    </div>
+                    <span className="accordian-icon">
+                        <FontAwesomeIcon icon={caretClass} />
+                    </span>
+                </div>
+            </li>
+            <ul className={className}>
                 {tools.map(x => (
-                    <div
+                    <li
                         className="icon-wrap"
-                        key={x}
+                        key={`toolbar-icon-${x}`}
                         title={nodeEntity[x].name}
                         draggable="true"
                         onDragStart={handleDragStart(nodeEntity[x])}
@@ -72,11 +84,11 @@ const ToolbarItems = ({ tools, nodeEntity, group }) => {
                                 typeof nodeEntity[x].icon === 'string' ? <FontAwesomeIcon icon={nodeEntity[x].icon} className={nodeEntity[x].className} /> : nodeEntity[x].icon
                             }
                         </div>
-                        <span className="flow-name">{nodeEntity[x].props.name}</span>
-                    </div>
+                        <span className="flow-name">{nodeEntity[x].name}</span>
+                    </li>
                 ))}
-            </div>
-        </div>
+            </ul>
+        </ul>
     );
 };
 

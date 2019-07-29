@@ -17,12 +17,14 @@ const Toolbar = ({ template, width, iconWritingMode }) => {
         >
             {
                 groups.map((group) => {
-                    const tools = nodes[group].filter(x => nodeEntity[x].props.showInToolbar === 'Y');
+                    const tools = nodes[group].children.filter(x => nodeEntity[x].showInToolbar !== 'N');
                     return (
                         <ToolbarItems
                             tools={tools}
                             nodeEntity={nodeEntity}
+                            key={`toobar-group-${group}`}
                             group={group}
+                            groupIcon={nodes[group].icon}
                         />
 
                     );

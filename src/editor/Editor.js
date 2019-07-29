@@ -16,6 +16,7 @@ import {
     getNewNode,
     getNodeById,
     getParentNodeById,
+    getTitleOfNode,
 } from '../utils';
 import Recycle from './recycle';
 import './editor.scss';
@@ -296,8 +297,7 @@ const Editor = (props, ref) => {
             const type = e.dataTransfer.getData('type');
             node = getNewNode(
                 type,
-                node.props.action,
-                node.props.name,
+                node,
                 getNewIdFunc(data),
             );
             const { flow, nodes } = getNewFlowByAdd({
@@ -434,6 +434,7 @@ const Editor = (props, ref) => {
 
     const renderNode = (node) => {
         const collapseState = collapseStateIds[`${COLLAPSE_STATE_ID_PREFIX}${node.id}`];
+        const title = getTitleOfNode(node);
         if (node.type === 'loop') {
             return (
                 <div
@@ -449,7 +450,7 @@ const Editor = (props, ref) => {
                         <div>
                             <FontAwesomeIcon icon="plus-square" className="expand-icon" />
                             <FontAwesomeIcon icon="minus-square" className="collapse-icon" />
-                            <span style={{ verticalAlign: 'top' }}>{node.name || node.type}</span>
+                            <span style={{ verticalAlign: 'top' }}>{title}</span>
                             <FontAwesomeIcon
                                 icon="undo"
                                 style={{
@@ -489,7 +490,7 @@ const Editor = (props, ref) => {
                         <div>
                             <FontAwesomeIcon icon="plus-square" className="expand-icon" />
                             <FontAwesomeIcon icon="minus-square" className="collapse-icon" />
-                            <span style={{ verticalAlign: 'top' }}>{node.name || node.type}</span>
+                            <span style={{ verticalAlign: 'top' }}>{title}</span>
                             <FontAwesomeIcon
                                 icon="sitemap"
                                 alt="switch"
@@ -530,7 +531,7 @@ const Editor = (props, ref) => {
                                         onDrop={handleDrop}
                                     >
                                         <div className="title">
-                                            <div>{x.name}</div>
+                                            <div>{getTitleOfNode(x)}</div>
                                             <FontAwesomeIcon
                                                 icon="bars"
                                                 style={{ width: '18px', height: '18px' }}
@@ -588,7 +589,7 @@ const Editor = (props, ref) => {
                 draggable="true"
                 onDragStart={handleDragStart(node.id)}
             >
-                {node.name || 'Node'}
+                {title}
             </div>
         );
     };

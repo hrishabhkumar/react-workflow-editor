@@ -2,69 +2,87 @@ $icon-wrap-width: 100%;
 $icon-wrap-height: 30px;
 $icon-width: 24px;
 $icon-height: 24px;
+$break-small: 320px;
+$break-large: 1200px;
 
 .react-workflow-toobar-container {
-  margin-left: 1px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  writing-mode: vertical-lr;
-  align-content: flex-start;
   background-color: #ddd;
-  border-right: 1px solid #444;
-  padding: 2px;
-  width: 120px;
+  padding-top: 16px;
+  width: 100%;
   height: 100%;
-  overflow-y: auto;
   overflow-x: hidden;
   .parent-accordion {
-    width: 100%;
-  }
-  .accordion-content {
+    padding-block-start: unset;
+    margin-block-start: unset;
+    margin-block-end: unset;
+    padding-inline-start: unset;
+    padding-left: 5px;
+    margin-bottom: 16px;
     .accordion-heading {
+      height: $icon-wrap-height;
+      white-space: nowrap;
+      padding-left: 5px;
+      padding-right: 5px;
+      list-style: none;
       &.clicked {
         font-weight: bold;
       }
+      .group-icon-wrap {
+        .group-icon {
+          float: left;
+        }
+        .group-title {
+          padding-left: 5px;
+        }
+        .accordian-icon {
+          float: right;
+          list-style: none;
+          padding-right: 5px;
+        }
+      }
     }
-    &.accordion-close {
-      display: none;
-    }
-    &.accordion-open {
-      display: block;
-    }
-  }
-  .icon-wrap {
-    width: $icon-wrap-width;
-    height: $icon-wrap-height;
-    writing-mode: horizontal-tb;
-    display: inline-block;
-    margin: 2px;
-    white-space: nowrap;
-    &:hover {
-      outline: 1px solid blue;
-      background-color: lightseagreen;
-    }
-  }
-  .flow-name {
-    font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    display: inline-block;
-    text-overflow: ellipsis;
-    width: 81px;
-    height: 24px;
-    vertical-align: middle;
-  }
-  .icon {
-    pointer-events: none;
-    width: 24px;
-    height: 24px;
-    background-size: contain;
-    display: inline-block;
-    >svg {
-      display: block;
-      width: 20px;
-      height: 20px;
+    .accordion-content {
+      list-style: none;
+      padding-inline-start: 10px;
+      &.accordion-close {
+        display: none;
+      }
+      &.accordion-open {
+        display: block;
+      }
+      .icon-wrap {
+        width: $icon-wrap-width;
+        height: $icon-wrap-height;
+        writing-mode: horizontal-tb;
+        display: inline-block;
+        padding: 2px;
+        padding-left: 5px;
+        white-space: nowrap;
+        &:hover {
+          font-weight: bolder;
+        }
+      }
+      .flow-name {
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        display: inline-block;
+        text-overflow: ellipsis;
+        width: 110px;
+        @media screen and (max-width: 320px) {
+          width: 81px;
+        }
+        height: 24px;
+        vertical-align: middle;
+        line-height: 2;
+      }
+      .icon {
+        pointer-events: none;
+        width: 24px;
+        background-size: contain;
+        display: inline-block;
+        vertical-align: middle;
+      }
     }
   }
 }
