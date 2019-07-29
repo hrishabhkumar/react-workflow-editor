@@ -18,7 +18,7 @@ import {
     getParentNodeById,
     getTitleOfNode,
 } from '../utils';
-import Recycle from './recycle';
+import Recycle from './Recycle';
 import './editor.scss';
 
 const COLLAPSE_STATE_ID_PREFIX = 'collapse-state-id-';
@@ -76,7 +76,7 @@ const Editor = (props, ref) => {
     };
 
     const handleKeyUp = (event) => {
-        if (event.key === 'Delete') {
+        if (event.key === 'Delete' || event.key === 'Backspace') {
             if (!currentId) {
                 return;
             }
@@ -103,7 +103,7 @@ const Editor = (props, ref) => {
             handleUpdateData(flow);
             return;
         }
-        if (event.ctrlKey) {
+        if (event.ctrlKey || event.keyCode === 91) {
             switch (event.key) {
                 case 'z':
                     (() => {

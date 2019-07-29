@@ -311,8 +311,6 @@ export const getTitleOfNode = (node) => {
             const names = Object.keys(node);
             const vals = Object.values(node);
             title = new Function(...names, `return \`${node.description}\`;`)(...vals); // eslint-disable-line
-            // const description = node.description.replace(/\$\{/g, '${node.');
-            // title = eval('`' + description + '`'); // eslint-disable-line
         } catch (e) {
             console.error(e);
         }
