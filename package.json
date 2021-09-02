@@ -68,7 +68,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.9.0",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "immer": "^3.1.3",
+    "immer": "^9.0.6",
     "stateshot": "^1.2.3"
   }
 }
